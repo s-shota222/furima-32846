@@ -5,6 +5,9 @@ RSpec.describe User, type: :model do
   end
 
   describe '新規登録/ユーザー情報' do
+    it '全ての値が入力されていれば保存できる' do
+      expect(@user).to be_valid
+    end 
     it 'nicknameが空では登録できない' do
       @user.nickname = ''
       @user.valid?
@@ -56,7 +59,7 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password には半角英字と半角数字の両方を含めて設定してください")
     end
-    it 'passwaordとpassword(確認用)が一致しないと登録できない' do
+    it 'passwordとpassword(確認用)が一致しないと登録できない' do
       @user.password_confirmation = 'test222'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
