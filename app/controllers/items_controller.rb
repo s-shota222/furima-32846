@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :get_item, only: [:show, :edit, :update]
-  before_action :move_to_index, only: [:edit]
+  before_action :move_to_index, only: [:edit, :update]
 
   def index
     @items = Item.order('created_at DESC')
@@ -27,8 +27,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item.update(item_params)
-    if @item.save
+    if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
       render :edit
