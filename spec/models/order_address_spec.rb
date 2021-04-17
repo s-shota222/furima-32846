@@ -8,7 +8,7 @@ RSpec.describe OrderAddress, type: :model do
     context '住所の保存が上手くいくとき' do
       it '必要な情報を適切に入力すると、住所の保存ができる' do
         expect(@order_address).to be_valid
-      end
+      end   
     end
 
     context '住所情報の保存がうまくいかないとき'do
@@ -56,6 +56,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.phone_number = "sssssssssss"
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number 11桁で以内で入力してください(ハイフン不要)")
+      end
+      it "tokenが空では登録できないこと" do
+        @order_address.token = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
