@@ -9,6 +9,8 @@ class OrderAddress
     validates :address
     validates :phone_number, numericality: { with: /\A\d{11}\z/, message: '11桁で以内で入力してください(ハイフン不要)' }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   def save
