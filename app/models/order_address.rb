@@ -7,8 +7,8 @@ class OrderAddress
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :city
     validates :address
-    validates :phone_number, numericality: { with: /\A\d{11}\z/, message: '11桁で以内で入力してください(ハイフン不要)' }
-    validates :token
+    validates :phone_number, format: { with: /\A\d{10}\z|\A\d{11}\z/, message: '11桁以内で入力してください(ハイフン不要)' }
+    validates :token                         
     validates :user_id
     validates :item_id
   end

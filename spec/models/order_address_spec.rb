@@ -57,12 +57,17 @@ RSpec.describe OrderAddress, type: :model do
       it '電話番号にハイフンが入っている場合は保存できない' do
         @order_address.phone_number = '-'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number 11桁で以内で入力してください(ハイフン不要)')
+        expect(@order_address.errors.full_messages).to include('Phone number 11桁以内で入力してください(ハイフン不要)')
       end
       it '電話番号が数字以外の場合保存できない' do
         @order_address.phone_number = 'sssssssssss'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number 11桁で以内で入力してください(ハイフン不要)')
+        expect(@order_address.errors.full_messages).to include('Phone number 11桁以内で入力してください(ハイフン不要)')
+      end
+      it '電話番号が12桁以上の場合保存できない' do
+        @order_address.phone_number = 123456789012
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone number 11桁以内で入力してください(ハイフン不要)')
       end
       it 'tokenが空では登録できない' do
         @order_address.token = nil
