@@ -1,15 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :get_item, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
   before_action :sold_item
 
   def index
-    get_item
     @order_address = OrderAddress.new
   end
 
   def create
-    get_item
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_item
@@ -42,12 +41,10 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    get_item
     redirect_to root_path if current_user.id == @item.user.id
   end
 
   def sold_item
-    get_item
     redirect_to root_path if @item.order
   end
 end
