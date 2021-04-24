@@ -55,7 +55,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it '電話番号にハイフンが入っている場合は保存できない' do
-        @order_address.phone_number = '-'
+        @order_address.phone_number = '090-1234-5678'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number 11桁以内で入力してください(ハイフン不要)')
       end
