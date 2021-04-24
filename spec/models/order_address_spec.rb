@@ -9,6 +9,10 @@ RSpec.describe OrderAddress, type: :model do
       it '必要な情報を適切に入力すると、住所の保存ができる' do
         expect(@order_address).to be_valid
       end
+      it '建物情報は空でも登録できる' do
+        @order_address.building = ''
+        expect(@order_address).to be_valid
+      end
     end
 
     context '住所情報の保存がうまくいかないとき' do
