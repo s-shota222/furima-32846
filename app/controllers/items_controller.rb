@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    　redirect_to root_path
+     redirect_to root_path
   end
 
   private
@@ -58,6 +58,6 @@ class ItemsController < ApplicationController
   end
 
   def sold_item
-    redirect_to root_path if @item.order.id
+    redirect_to root_path if @item.order
   end
 end
